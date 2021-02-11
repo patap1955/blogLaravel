@@ -9,7 +9,7 @@ class PostsController extends Controller
 {
     public function index()
     {
-        $posts = Post::latest()->get();
+        $posts = Post::where('status', '=', true)->latest()->get();
         return view('welcome', compact('posts'));
     }
 
@@ -20,24 +20,24 @@ class PostsController extends Controller
 
     public function store(Request $request)
     {
-        $validate = (object) $this->validate(request(), [
+        $validate = $this->validate(request(), [
             'title' => 'required|min:5|max:100',
             'description' => 'required|max:255',
             'text' => 'required',
             'slug' => 'required|alpha_dash|unique:posts,slug',
         ]);
-        $post = new Post();
-        $post->title = $validate->title;
-        $post->description = $validate->description;
-        $post->text = $validate->text;
-        $post->slug = $validate->slug;
-        if (!isset($request->status)) $post->status = false;
 
-        $post->save();
+        $status = (!isset($request->status)) ? false : true;
 
-        return redirect('/');
-        //dd(request()->all());
+        Post::create([
+            'title' => $validate['title'],
+            'description' => $validate['description'],
+            'text' => $validate['text'],
+            'slug' => $validate['slug'],
+            'status' => $status
+        ]);
 
+        return redirect(route('index'));
     }
 
     public function show(Post $post)

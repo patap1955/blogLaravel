@@ -19,6 +19,6 @@ class FeedbacksController extends Controller
         ]);
         Reference::create($validate);
 
-        return redirect('/contacts');
+        return redirect( route('contacts') );
     }
 }

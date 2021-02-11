@@ -1,18 +1,12 @@
-<?php
-$data = (object) [
-    'title' => 'Админ раздел',
-    'description' => 'Страница администротирования сайта'
-];
-?>
 @extends('layouts.master')
 
-@section('description', $data->description)
-@section('title', $data->title)
+@section('description', 'Страница администротирования сайта')
+@section('title', 'Админ раздел')
 
 @section('content')
     <div class="col-md-8 blog-main">
         <h3 class="pb-4 mb-4 font-italic border-bottom">
-            {{ $data->title }}
+            @yield('title')
         </h3>
 
         <div class="blog-post">

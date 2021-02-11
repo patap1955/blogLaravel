@@ -1,22 +1,16 @@
-<?php
-$data = (object) [
-    'title' => 'Контакты',
-    'description' => 'Наши контакты и форма обратной связи'
-];
-?>
 @extends('layouts.master')
 
-@section('description', $data->description)
-@section('title', $data->title)
+@section('description', 'Наши контакты и форма обратной связи')
+@section('title', 'Контакты')
 
 @section('content')
     <div class="col-md-8 blog-main">
         <h3 class="pb-4 mb-4 font-italic border-bottom">
-            {{ $data->title }}
+            @yield('title')
         </h3>
 
         <div class="blog-post">
-            {{ $data->description }}
+            @yield('description')
 
             <h3 class="pb-4 mb-4 font-italic border-bottom">
                 Форма обратной связи
@@ -24,7 +18,7 @@ $data = (object) [
 
             @include('layouts.errors')
 
-            <form method="post" action="/feedbacks">
+            <form method="post" action="{{ route('feedbacks.store') }}">
                 @csrf
                 <div class="mb-3">
                     <label for="inputEmail" class="form-label">E-mail</label>

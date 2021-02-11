@@ -1,12 +1,6 @@
-<?php
-$data = (object) [
-    'title' => 'Добавление статьи',
-    'description' => 'Страница добавления статьи'
-];
-?>
 @extends('layouts.master')
-@section('description', $data->description)
-@section('title', $data->title)
+@section('description', 'Страница добавления статьи')
+@section('title', 'Добавление статьи')
 @section('content')
     <div class="col-md-8 blog-main">
         <h3 class="pb-4 mb-4 font-italic border-bottom">
@@ -15,7 +9,7 @@ $data = (object) [
 
         <div class="blog-post">
             @include('layouts.errors')
-            <form method="post" action="/posts">
+            <form method="post" action="{{ route('post.store') }}">
                 @csrf
                 <div class="mb-3">
                     <label for="inputTitle" class="form-label">Название статьи</label>
