@@ -26,8 +26,8 @@ class PostsController extends Controller
             'text' => 'required',
             'slug' => 'required|alpha_dash|unique:posts,slug',
         ]);
-
-        $status = (!isset($request->status)) ? false : true;
+        if (!isset($request->status)) $status = false;
+        else $status = true;
 
         Post::create([
             'title' => $validate['title'],
