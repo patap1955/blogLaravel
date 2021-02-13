@@ -9,4 +9,6 @@ class Post extends Model
 {
     use HasFactory;
     public $guarded = [];
+    public $incrementing = false;
+    protected $primaryKey = 'slug';
 }

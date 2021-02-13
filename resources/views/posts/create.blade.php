@@ -9,7 +9,7 @@
 
         <div class="blog-post">
             @include('layouts.errors')
-            <form method="post" action="{{ route('post.store') }}">
+            <form method="post" action="{{ route('posts.store') }}">
                 @csrf
                 <div class="mb-3">
                     <label for="inputTitle" class="form-label">Название статьи</label>
