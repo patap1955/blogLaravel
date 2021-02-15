@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Post;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class PostRequest extends FormRequest
 {
@@ -28,8 +29,12 @@ class PostRequest extends FormRequest
             'title' => 'required|min:5|max:100',
             'description' => 'required|max:255',
             'text' => 'required',
+            'slug' => [
+                'required',
+                'alpha_dash',
+                Rule::unique('posts', 'slug')->ignore($this->route('post'))]
+
         ];
-        if ($this->route()->parameters === []) $validate['slug'] = 'required|alpha_dash|unique:posts,slug' ;
 
         return $validate;
     }

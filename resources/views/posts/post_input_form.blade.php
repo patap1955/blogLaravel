@@ -3,7 +3,7 @@
     <input
         type="text"
         name="title"
-        value=@if(isset($post)) "{{ $post->title }}" @else "{{ old('title') }}" @endif
+        value="{{$post->title ? $post->title : old('title')}}"
         class="form-control" id="inputTitle"
         placeholder="Введите название задачи"
     >
@@ -13,7 +13,7 @@
     <input
         type="text"
         name="description"
-        value=@if(isset($post)) "{{ $post->description }}" @else "{{ old('description') }}" @endif
+        value="{{$post->description ? $post->description : old('description')}}"
         class="form-control"
         id="inputDescription"
         placeholder="Введите краткое описание статьи"
@@ -25,18 +25,17 @@
         class="form-control"
         id="inputText" name="text"
         placeholder="Введите детальное описание статьи"
-    >@if(isset($post)){{ $post->text }}@else{{ old('text') }}@endisset</textarea>
+    >{{$post->text ? $post->description : old('text')}}</textarea>
 </div>
 <div class="mb-3">
     <label for="inputSlug" class="form-label">Символьный код</label>
     <input
         type="text"
         name="slug"
-        value=@if(isset($post)) "{{ $post->slug }}" @else "{{ old('slug') }}" @endif
+        value="{{$post->slug ? $post->slug : old('slug')}}"
         class="form-control"
         id="inputText"
         placeholder="Введите символьный код статьи"
-        @isset($post) disabled @endisset
     >
 </div>
 <div class="form-group form-check">
@@ -45,7 +44,7 @@
         name="status"
         class="form-check-input"
         id="exampleCheck1"
-        @isset($post) {{ $post->status ? 'checked' : '' }} @endisset
+        {{ $post->status ? 'checked' : '' }}
     >
     <label class="form-check-label" for="exampleCheck1">Опубликовать статью?</label>
 </div>
