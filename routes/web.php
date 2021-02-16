@@ -9,4 +9,3 @@ Route::get('/admin/feedbacks', 'App\Http\Controllers\FeedbacksController@index')
 Route::post('/feedbacks', 'App\Http\Controllers\FeedbacksController@store')->name('feedbacks.store');
 
 Route::resource('/posts', 'App\Http\Controllers\PostsController');
-
