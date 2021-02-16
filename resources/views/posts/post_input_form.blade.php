@@ -3,7 +3,7 @@
     <input
         type="text"
         name="title"
-        value="{{$post->title ? $post->title : old('title')}}"
+        value="{{ $post->title ?? old('title') }}"
         class="form-control" id="inputTitle"
         placeholder="Введите название задачи"
     >
@@ -13,7 +13,7 @@
     <input
         type="text"
         name="description"
-        value="{{$post->description ? $post->description : old('description')}}"
+        value="{{ $post->description ?? old('description') }}"
         class="form-control"
         id="inputDescription"
         placeholder="Введите краткое описание статьи"
@@ -25,14 +25,14 @@
         class="form-control"
         id="inputText" name="text"
         placeholder="Введите детальное описание статьи"
-    >{{$post->text ? $post->description : old('text')}}</textarea>
+    >{{ $post->text ?? old('text') }}</textarea>
 </div>
 <div class="mb-3">
     <label for="inputSlug" class="form-label">Символьный код</label>
     <input
         type="text"
         name="slug"
-        value="{{$post->slug ? $post->slug : old('slug')}}"
+        value="{{ $post->slug ?? old('slug') }}"
         class="form-control"
         id="inputText"
         placeholder="Введите символьный код статьи"
