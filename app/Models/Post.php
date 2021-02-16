@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Post extends Model
 {
     use HasFactory;
-    public $guarded = [];
-    public $incrementing = false;
+    protected $guarded = [];
+    protected $keyType = 'string';
     protected $primaryKey = 'slug';
 }

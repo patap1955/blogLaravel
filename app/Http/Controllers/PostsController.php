@@ -22,7 +22,7 @@ class PostsController extends Controller
     public function store(PostRequest $request)
     {
         $validate = $request->validated();
-        $validate['status'] = (!is_null($request->status)) ? true : false;
+        if (!$request->status) $validate['status'] = false;
 
         Post::create($validate);
 
@@ -40,7 +40,7 @@ class PostsController extends Controller
     public function update(Post $post, PostRequest $request)
     {
         $validate = $request->validated();
-        $validate['status'] = (!is_null($request->status)) ? true : false;
+        if (!$request->status) $validate['status'] = false;
 
         $post->update($validate);
         session()->flash('success', 'Статья успешно отредактированна');
