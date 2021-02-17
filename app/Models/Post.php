@@ -8,5 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Post extends Model
 {
     use HasFactory;
-    public $guarded = [];
+    protected $guarded = [];
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
 }
