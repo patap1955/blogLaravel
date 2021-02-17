@@ -16,9 +16,8 @@ $data = (object) [
                 <div class="blog-post">
                     <h2 class="blog-post-title"><a href="{{ route('posts.show', ['post' => $post->slug]) }}">{{ $post->title }}</a></h2>
                     <p class="blog-post-meta">{{ $post->created_at }}<a href="#">Mark</a></p>
-
+                    @include('layouts.tags_show', ['tags' => $post->tags])
                     {{ $post->description }}
-
                 </div>
             @endforeach
             <nav class="blog-pagination">

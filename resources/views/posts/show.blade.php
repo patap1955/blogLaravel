@@ -8,6 +8,7 @@
         </h3>
         <a href="{{ route('posts.edit', ['post' => $post->slug]) }}">Редактировать статью</a>
         <div class="blog-post">
+            @include('layouts.tags_show', ['tags' => $post->tags])
             {{ $post->text }}
         </div>
         <a href="{{ route('posts.edit', ['post' => $post->slug]) }}">Редактировать статью</a>

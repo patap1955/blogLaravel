@@ -4,12 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Post\PostRequest;
 use App\Models\Post;
+use App\Models\Tag;
 
 class PostsController extends Controller
 {
     public function index()
     {
-        $posts = Post::where('status', '=', true)->latest()->get();
+        $posts = Post::with('tags')->where('status', '=', true)->latest()->get();
         return view('welcome', compact('posts'));
     }
 
@@ -43,6 +44,32 @@ class PostsController extends Controller
         $validate['status'] = $request->has('status');
 
         $post->update($validate);
+
+//        $postTags = $post->tags->keyBy('name');
+//        $tags = collect(explode(',', $request->tags))->keyBy(function ($item) {{ return $item; }});
+//        $tagsToAttach = $tags->diffKeys($postTags);
+//        $tagsToDetach = $postTags->diffKeys($tags);
+//
+//        foreach ($tagsToAttach as $tag) {
+//            $tag = Tag::firstOrCreate(['name' => $tag]);
+//            $post->tags()->attach($tag);
+//        }
+//
+//        foreach ($tagsToDetach as $tag) {
+//            $post->tags()->detach($tag);
+//        }
+
+        $postTags = $post->tags->keyBy('name');
+        $tags = collect(explode(',', $request->tags))->keyBy(function ($item) {{ return $item; }});
+        $syncIds = $postTags->intersectByKeys($tags)->pluck('id')->toArray();
+        $tagsToAttach = $tags->diffKeys($postTags);
+
+        foreach ($tagsToAttach as $tag) {
+            $tag = Tag::firstOrCreate(['name' => $tag]);
+            $syncIds[] = $tag->id;
+        }
+
+        $post->tags()->sync($syncIds);
 
         session()->flash('success', 'Статья успешно отредактированна');
         return redirect(route('index'));
