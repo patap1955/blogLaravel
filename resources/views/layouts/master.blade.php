@@ -7,7 +7,7 @@
     <title>@yield('title')</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="../assets/css/bootstrap.css" rel="stylesheet">
+    <link href="{{ asset('assets/css/bootstrap.css')  }}" rel="stylesheet">
 
     <style>
         .bd-placeholder-img {
@@ -28,16 +28,19 @@
     <!-- Custom styles for this template -->
     <link href="https://fonts.googleapis.com/css?family=Playfair+Display:700,900" rel="stylesheet">
     <!-- Custom styles for this template -->
-    <link href="../assets/css/blog.css" rel="stylesheet">
+    <link href="{{ asset('assets/css/blog.css') }}" rel="stylesheet">
 </head>
 <body>
 @include('layouts.nav')
 
+<div class="container">
+    @include('layouts.flash_message_success')
+</div>
 <main role="main" class="container">
     <div class="row">
+
         @yield('content')
     </div>
-
 </main><!-- /.container -->
 
 @include('layouts.footer')
