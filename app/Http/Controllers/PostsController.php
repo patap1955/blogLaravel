@@ -25,7 +25,19 @@ class PostsController extends Controller
         $validate = $request->validated();
         $validate['status'] = $request->has('status');
 
-        Post::create($validate);
+        $post = Post::create($validate);
+
+        $postTags = $post->tags->keyBy('name');
+        $tags = collect(explode(',', $request->tags))->keyBy(function ($item) {{ return $item; }});
+        $syncIds = $postTags->intersectByKeys($tags)->pluck('id')->toArray();
+        $tagsToAttach = $tags->diffKeys($postTags);
+
+        foreach ($tagsToAttach as $tag) {
+            $tag = Tag::firstOrCreate(['name' => $tag]);
+            $syncIds[] = $tag->id;
+        }
+
+        $post->tags()->sync($syncIds);
 
         session()->flash('success', 'Статья успешно добавленна');
 
