@@ -3,7 +3,7 @@
     <input
         type="text"
         name="title"
-        value="{{ old('title', $post->title ) }}"
+        value="{{ old('title', $post->title) }}"
         class="form-control" id="inputTitle"
         placeholder="Введите название задачи"
     >
@@ -13,7 +13,7 @@
     <input
         type="text"
         name="description"
-        value="{{ old('description', $post->description ) }}"
+        value="{{ old('description', $post->description) }}"
         class="form-control"
         id="inputDescription"
         placeholder="Введите краткое описание статьи"
@@ -25,14 +25,14 @@
         class="form-control"
         id="inputText" name="text"
         placeholder="Введите детальное описание статьи"
-    >{{ old('text', $post->text ) }}</textarea>
+    >{{ old('text', $post->text) }}</textarea>
 </div>
 <div class="mb-3">
     <label for="inputSlug" class="form-label">Символьный код</label>
     <input
         type="text"
         name="slug"
-        value="{{ old('slug', $post->slug ) }}"
+        value="{{ old('slug', $post->slug) }}"
         class="form-control"
         id="inputText"
         placeholder="Введите символьный код статьи"
@@ -44,7 +44,7 @@
         name="status"
         class="form-check-input"
         id="exampleCheck1"
-        {{ $post->status ? 'checked' : '' }}
+        {{ old('status', $post->status) ? 'checked' : '' }}
     >
     <label class="form-check-label" for="exampleCheck1">Опубликовать статью?</label>
 </div>
