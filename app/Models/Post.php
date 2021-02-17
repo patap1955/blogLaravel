@@ -9,6 +9,8 @@ class Post extends Model
 {
     use HasFactory;
     protected $guarded = [];
-    protected $keyType = 'string';
-    protected $primaryKey = 'slug';
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
 }

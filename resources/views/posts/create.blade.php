@@ -11,7 +11,7 @@
             @include('layouts.errors')
             <form method="post" action="{{ route('posts.store') }}">
                 @csrf
-                @include('posts.post_input_form')
+                @include('posts.post_input_form', $post)
                 <button type="submit" class="btn btn-primary">Создать задачу</button>
             </form>
         </div>
