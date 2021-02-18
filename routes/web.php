@@ -8,5 +8,5 @@ Route::get('/contacts', 'App\Http\Controllers\PagesController@contacts')->name('
 Route::get('/admin/feedbacks', 'App\Http\Controllers\FeedbacksController@index')->name('admin.feedbacks');
 Route::post('/feedbacks', 'App\Http\Controllers\FeedbacksController@store')->name('feedbacks.store');
 
-Route::get('/posts/tags/{tag}', 'App\Http\Controllers\TagsController@index')->name('tags.index');
+Route::get('/posts/tags/{tag}', 'App\Http\Controllers\TagsController@index')->name('posts.tags');
 Route::resource('/posts', 'App\Http\Controllers\PostsController');
