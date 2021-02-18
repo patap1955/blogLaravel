@@ -48,3 +48,14 @@
     >
     <label class="form-check-label" for="exampleCheck1">Опубликовать статью?</label>
 </div>
+<div class="mb-3">
+    <label for="inputTags" class="form-label">Теги</label>
+    <input
+        type="text"
+        name="tags"
+        value="{{ old('tags', $post->tags->pluck('name')->implode(',')) }}"
+        class="form-control"
+        id="inputTags"
+        placeholder="Теги"
+    >
+</div>

@@ -3,13 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Post\PostRequest;
+use App\Http\Requests\TagsRequest;
 use App\Models\Post;
+use App\Services\TagsSynchronizer;
 
 class PostsController extends Controller
 {
     public function index()
     {
-        $posts = Post::where('status', '=', true)->latest()->get();
+        $posts = Post::with('tags')->where('status', '=', true)->latest()->get();
         return view('welcome', compact('posts'));
     }
 
@@ -19,12 +21,19 @@ class PostsController extends Controller
         return view('posts.create', compact('post'));
     }
 
-    public function store(PostRequest $request)
+    public function store(
+        PostRequest $request,
+        TagsSynchronizer $synchronizer,
+        TagsRequest $tagsRequest
+    )
     {
         $validate = $request->validated();
         $validate['status'] = $request->has('status');
 
-        Post::create($validate);
+        $post = Post::create($validate);
+        $tags = $tagsRequest->tagsCollect($request->tags);
+
+        $synchronizer->sync($tags, $post);
 
         session()->flash('success', 'Статья успешно добавленна');
 
@@ -37,12 +46,20 @@ class PostsController extends Controller
         return view('posts.show', compact('post'));
     }
 
-    public function update(Post $post, PostRequest $request)
+    public function update(
+        Post $post,
+        PostRequest $request,
+        TagsSynchronizer $synchronizer,
+        TagsRequest $tagsRequest
+    )
     {
         $validate = $request->validated();
         $validate['status'] = $request->has('status');
 
         $post->update($validate);
+        $tags = $tagsRequest->tagsCollect($request->tags);
+
+        $synchronizer->sync($tags, $post);
 
         session()->flash('success', 'Статья успешно отредактированна');
         return redirect(route('index'));

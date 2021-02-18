@@ -38,8 +38,8 @@
 </div>
 <main role="main" class="container">
     <div class="row">
-
         @yield('content')
+        @include('layouts.sidebar')
     </div>
 </main><!-- /.container -->
 
