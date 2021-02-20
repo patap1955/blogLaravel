@@ -10,3 +10,7 @@ Route::post('/feedbacks', 'App\Http\Controllers\FeedbacksController@store')->nam
 
 Route::get('/posts/tags/{tag}', 'App\Http\Controllers\TagsController@index')->name('posts.tags');
 Route::resource('/posts', 'App\Http\Controllers\PostsController');
+
+Auth::routes();
+
+Route::get('/user/posts', 'App\Http\Controllers\AdminUsersController@index')->name('user_posts.index');
