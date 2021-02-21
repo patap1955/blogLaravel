@@ -11,7 +11,8 @@ class PostsController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('can:update,post')->except(['index', 'create', 'store', 'show']);
+        $this->middleware('auth')->except(['index', 'show']);
+        $this->middleware('can:update,post')->except(['create', 'store', 'show', 'index', 'destroy']);
     }
 
     public function index()
@@ -80,7 +81,6 @@ class PostsController extends Controller
 
     public function edit(Post $post)
     {
-        //$this->authorize('update', $post);
         return view('posts.edit', compact('post'));
     }
 }
