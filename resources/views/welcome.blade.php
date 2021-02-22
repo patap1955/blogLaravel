@@ -1,16 +1,10 @@
-<?php
-$data = (object) [
-    'title' => 'Главная',
-    'description' => 'Главная страница сайта blog.laravel'
-];
-?>
 @extends('layouts.master')
-    @section('description', $data->description)
-    @section('title', $data->title)
+    @section('description', 'Главная страница сайта blog.laravel')
+    @section('title', 'Главная')
     @section('content')
         <div class="col-md-8 blog-main">
             <h3 class="pb-4 mb-4 font-italic border-bottom">
-                {{ $data->title }}
+                @yield('title')
             </h3>
             @foreach($posts as $post)
                 <div class="blog-post">

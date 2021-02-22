@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\PostCreated;
 use App\Http\Requests\Post\PostRequest;
 use App\Http\Requests\TagsRequest;
 use App\Models\Post;
