@@ -12,7 +12,9 @@ class PostsController extends Controller
     public function __construct()
     {
         $this->middleware('auth')->except(['index', 'show']);
-        $this->middleware('can:update,post')->except(['create', 'store', 'show', 'index', 'destroy']);
+        $this->middleware('can:update,post')->only(['update', 'destroy', 'edit']);
+//        $this->middleware('auth')->except(['index', 'show']);
+//        $this->middleware('can:update,post')->except(['create', 'store', 'show', 'index', 'destroy']);
     }
 
     public function index()
