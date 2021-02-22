@@ -6,12 +6,16 @@
         <h3 class="pb-4 mb-4 font-italic border-bottom">
             {{ $post->title }}
         </h3>
-        <a href="{{ route('posts.edit', ['post' => $post->slug]) }}">Редактировать статью</a>
+        @can('update', $post)
+            <a href="{{ route('posts.edit', ['post' => $post->slug]) }}">Редактировать статью</a>
+        @endcan
         <div class="blog-post">
             @include('layouts.tags_show', ['tags' => $post->tags])
             {{ $post->text }}
         </div>
-        <a href="{{ route('posts.edit', ['post' => $post->slug]) }}">Редактировать статью</a>
+        @can('update', $post)
+            <a href="{{ route('posts.edit', ['post' => $post->slug]) }}">Редактировать статью</a>
+        @endcan
 
         <nav class="blog-pagination">
             <a class="btn btn-outline-primary" href="/">На главную</a>

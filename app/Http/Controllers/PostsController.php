@@ -9,6 +9,14 @@ use App\Services\TagsSynchronizer;
 
 class PostsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth')->except(['index', 'show']);
+        $this->middleware('can:update,post')->only(['update', 'destroy', 'edit']);
+//        $this->middleware('auth')->except(['index', 'show']);
+//        $this->middleware('can:update,post')->except(['create', 'store', 'show', 'index', 'destroy']);
+    }
+
     public function index()
     {
         $posts = Post::with('tags')->where('status', '=', true)->latest()->get();
@@ -29,6 +37,7 @@ class PostsController extends Controller
     {
         $validate = $request->validated();
         $validate['status'] = $request->has('status');
+        $validate['owner_id'] = auth()->id();
 
         $post = Post::create($validate);
         $tags = $tagsRequest->tagsCollect($request->tags);
@@ -37,7 +46,7 @@ class PostsController extends Controller
 
         session()->flash('success', 'Статья успешно добавленна');
 
-        return redirect(route('index',));
+        return redirect(route('user_posts.index'));
 
     }
 
