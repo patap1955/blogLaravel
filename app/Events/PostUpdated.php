@@ -2,6 +2,7 @@
 
 namespace App\Events;
 
+use App\Mail\PostUpdate;
 use App\Models\Post;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
@@ -19,6 +20,6 @@ class PostUpdated
      */
     public function __construct(Post $post)
     {
-        $this->post = $post;
+        $this->post = new PostUpdate($post);
     }
 }

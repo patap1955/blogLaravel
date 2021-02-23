@@ -2,6 +2,7 @@
 
 namespace App\Events;
 
+use App\Mail\PostCreate;
 use App\Models\Post;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
@@ -19,6 +20,6 @@ class PostCreated
      */
     public function __construct(Post $post)
     {
-        $this->post = $post;
+        $this->post = new PostCreate($post);
     }
 }
