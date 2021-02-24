@@ -13,6 +13,8 @@ class PostCreated
 
     public $post;
 
+    private $events = 'created';
+
     /**
      * Create a new event instance.
      *
@@ -20,6 +22,11 @@ class PostCreated
      */
     public function __construct(Post $post)
     {
-        $this->post = new PostCreate($post);
+        $this->post = $post;
+    }
+
+    public function getEvent()
+    {
+        return $this->events;
     }
 }

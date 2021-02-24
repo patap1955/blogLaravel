@@ -13,6 +13,8 @@ class PostUpdated
 
     public $post;
 
+    private $events = 'updated';
+
     /**
      * Create a new event instance.
      *
@@ -20,6 +22,11 @@ class PostUpdated
      */
     public function __construct(Post $post)
     {
-        $this->post = new PostUpdate($post);
+        $this->post = $post;
+    }
+
+    public function getEvent()
+    {
+        return $this->events;
     }
 }

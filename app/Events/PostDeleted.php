@@ -13,6 +13,8 @@ class PostDeleted
 
     public $post;
 
+    private $event = 'deleted';
+
     /**
      * Create a new event instance.
      *
@@ -20,6 +22,11 @@ class PostDeleted
      */
     public function __construct(Post $post)
     {
-        $this->post = new PostDelete($post);
+        $this->post = $post;
+    }
+
+    public function getEvent()
+    {
+        return $this->events;
     }
 }
