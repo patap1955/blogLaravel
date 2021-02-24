@@ -13,7 +13,7 @@ class PostDeleted
 
     public $post;
 
-    private $event = 'deleted';
+    private $events = 'deleted';
 
     /**
      * Create a new event instance.

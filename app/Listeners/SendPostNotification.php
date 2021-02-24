@@ -24,6 +24,10 @@ class SendPostNotification
     public function handle($event)
     {
         $render = $this->render[$event->getEvent()];
-        Mail::to(config('mail.from.address'))->send(new $render($event->post));
+        if (config('mail.from.address')) {
+            Mail::to(config('mail.from.address'))->send(new $render($event->post));
+        }
+
+
     }
 }
